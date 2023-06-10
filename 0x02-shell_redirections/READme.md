@@ -1,2 +1,0 @@
-sshell redirections
-
