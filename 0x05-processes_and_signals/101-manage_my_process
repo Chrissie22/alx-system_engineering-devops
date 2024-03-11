@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Manages the program 'manage_my_process':
+# When passing the argument 'start:
+#	Starts 'mangae_my_process'
+#	Creates a file containing its PID in '/var/run/my_process.pid'
+#	Displays 'manage_my_process started'
+#
+# When passing the argument 'stop':
+#	Stops 'manage_my_process'
+#	Deletes '/var/run/my_process.pid'
+#	Displays 'manage_my_process stopped'
+#
+# When passing the argument 'restart':
+#	Stops 'manage_my_process'
+#	Deletes '/var/run/my_process.pid'
+#	Starts 'manage_my_process'
+#	Creates a file containing its PID in '/var/run/my_process.pid'
+#	Displays 'manage_my_process restarted'
+#
+# If any other argument or no argument is passed:
+#	Displays 'Usage: mangae_my_process {start|stop|restart}
+
+PID_FILE="/var/run/my_process.pid"
+
+if [ "${1}" == "start" ]
+then
+	./manage_my_process &
+	echo "$!" > "$PID_FILE"
+	echo "manage_my_process started"
+elif [ "${1}" == "stop" ]
+then
+	kill $( cat "$PID_FILE")
+	rm -rf "$PID_FILE"
+	echo "manea_my_process stopped"
+elif [ "${1}" == "restart" ]
+then
+	kill $( cat "$PID_FILE" )
+	rm -rf "$PID_FILE"
+	./manage_my_process &
+	echo "$!" > "$PID_FILE"
+	echo "manage_my_process restarted"
+else
+	echo "Usage: manage_my_process {start|stop|restart}"
+fi
