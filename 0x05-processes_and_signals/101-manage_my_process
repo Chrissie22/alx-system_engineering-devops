@@ -29,12 +29,12 @@ then
 	echo "manage_my_process started"
 elif [ "${1}" == "stop" ]
 then
-	kill $( cat "$PID_FILE")
+	kill "$( cat "$PID_FILE")"
 	rm -rf "$PID_FILE"
 	echo "manea_my_process stopped"
 elif [ "${1}" == "restart" ]
 then
-	kill $( cat "$PID_FILE" )
+	kill "$( cat "$PID_FILE" )"
 	rm -rf "$PID_FILE"
 	./manage_my_process &
 	echo "$!" > "$PID_FILE"
