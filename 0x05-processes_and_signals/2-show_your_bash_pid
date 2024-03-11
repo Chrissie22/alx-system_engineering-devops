@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# DIsplays lines containing the wors 'bash',
+#+ thus allowing you to easily get the PID of the basah process.
+
+ps -faux | grep "bash"
